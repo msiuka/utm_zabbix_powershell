@@ -41,3 +41,15 @@ if ($args[0] -eq "LASTCHECK")
        write-output $unixtime
     }
 }
+if ($args[0] -eq "ERRORS")
+{
+    $parsed = [Regex]::Matches($content,'Проблемы с RSA<\/div><div class="col-md-8 col-sm-8 col-lg-8">(.+)<\/div><\/div>')
+	if ($parsed.Success)
+    {
+        write-output $parsed[0].Groups[1].Value
+    }
+    else
+    {
+       write-output ""
+    }
+}
